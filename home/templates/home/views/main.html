@@ -1,0 +1,61 @@
+<div class="list-group">
+	<!-- 개인 알림 -->
+	<div class="panel panel-default">
+		<button type="button" class="btn btn-default lg message_button">
+			<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+		</button>
+		<div class="panel-heading">Battle.net</div>
+		<div class="panel-body" style="padding:0px !important">
+			<ul class="nav nav-pills" role="tablist" style="float:right !important">
+			  <li role="presentation" class="{$ play.cnt >0 && 'active' || '' $}">
+			  	<a href="#/">Play 
+				  	<span class="badge">
+				  		{$ play.cnt >0 && play.cnt || 0 $}
+				  	</span>
+			  	</a>
+			  </li>
+			  <li role="presentation" class="{$ message.cnt >0 && 'active' || '' $}">
+			  	<a href="#/message">Messages
+				  	<span class="badge">
+				  	{$ play.cnt >0 && message.cnt || 0 $}
+				  	</span>
+			  	</a>
+			  </li>
+			</ul>
+			<p style="padding-left:15px; padding-top:13px;">
+			{$ user.id $}님 환영합니다
+			</p>
+		</div>
+	</div>
+	<!-- 유저 게임 정보 -->
+	<div class="panel panel-default">
+		<div class="panel-heading">현재 개인 베틀넷 점수 & 순위</div>
+		<div class="panel-body">
+		<ul class="list-group">
+		    <li class="list-group-item">다마수 {$ user.point $}</li>
+		    <li class="list-group-item">현재 학과 {$ user.deptRank $} 위</li>
+		    <li class="list-group-item">학교 {$ user.uniRank $} 위</li>
+		    <li class="list-group-item">마지막 경기는 
+		    {$ user.lastPlay  | date:'MMM d, y' $} 입니다. </li>
+	  	</ul>
+		</div>
+	</div>
+	<div class="panel panel-default scroll">
+		<div class="panel-body">
+			현재 {$ user.totalUserCnt $} 명이 ‘대학당구배틀’을 이용중입니다.
+		</div>
+		<!-- Notice Table -->
+		<table class="table">
+			<cols>
+			</cols>
+			<thead>
+				<tr>
+					<td></td>
+				</tr>
+				<tr ng-repeat="notice in notices track by $index">
+					<td>{$ notice $}</td>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</div>
