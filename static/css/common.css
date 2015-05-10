@@ -1,0 +1,8 @@
+html,body { height: 100%; margin: 0; padding: 0; }
+body{margin:0}
+.contents{
+	min-height:100%; 
+	position: relative;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
