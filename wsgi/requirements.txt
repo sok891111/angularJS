@@ -1,0 +1,7 @@
+djangorestframework==3.1.0
+Django==1.8
+django-toolbelt==0.0.1
+Pygemnts==1.5
+Markdown==2.2.0
+static3==0.5.1
+wsgiref==0.1.2

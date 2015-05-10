@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}대학당구배틀{% endblock %}
+{% block extrastyle %}<link href="{% static 'login/css/login.css'%}" type="text/css" rel="stylesheet">{% endblock %}
+{% block script %}
+<script>
+$(document).ready(function(){
+	{% if message %}
+		var message ="이메일과 비밀번호를 다시한번 확인해주세요";
+		$('#userEmail').validate({{message}}, message);
+		$('#userPw').validate({{message}}, message);
+		$('#userEmail').keyup(function(){
+			rmErrMsg();
+		});
+		$('#userPw').keyup(function(){
+			rmErrMsg();
+		});
+	{% endif %}
+
+	//신규회원 가입
+	$('#regBtn').click(function(){
+		window.location = "/login/reg_form";
+	});
+	$('#loginBtn').click(function(){
+		$('#aform').submit();
+	});
+
+});
+
+var rmErrMsg = function(){
+	if($.getSubmitPermisstion()) return;
+	$('label[id^="validate_"]').each(function(){
+		var obj = $(this);
+		obj.parent().removeClass("has-error");
+		obj.remove();
+	});
+	$.setSubmitPermisstion(true);
+}
+</script>
+{% endblock %}
+{% block pagetitle %}
+<div class="page-header">
+	<h1>환영합니다</h1>
+</div>
+{% endblock %}
+{% block subtitle %}
+<div class="lead">
+	대학 당구 배틀 모바일서비스를 위한 본인 인증 작업을 수행합니다.
+</div>
+{% endblock %}
+{% block body %} 
+<div class="login">
+	<form id="aform" method="post" action="{% url 'login:login' %}">
+	{% csrf_token %}
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">이메일 주소</label>
+	    <input type="email" class="form-control" id="userEmail" name ="userEmail" placeholder="이메일을 입력하세요">
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputPassword1">비밀번호</label>
+	    <input type="password" class="form-control" id="userPw" name="userPw" placeholder="암호">
+	  </div>
+	  <button type="button" class="btn btn-default" id ="loginBtn">로그인</button>
+	  <br/><br/>
+	  <div class="form-group">
+	  	<p class="text-muted">* 비밀번호를 잊으셨나요?</p> 
+	    <button type="button" class="btn btn-default">비밀번호 찾기</button>
+	  </div>
+	  <br/>
+	  <div class="form-group">
+	  	<p class="text-muted">* 아직 회원이 아니신가요?</p> 
+	  	<p class="text-muted">&nbsp;&nbsp;회원가입 후 로그인 해주세요.</p> 
+	    <button type="button" id="regBtn" class="btn btn-default">회원가입</button>
+	  </div>
+	  
+	  
+
+	</form>
+</div>
+
+{% endblock %}
